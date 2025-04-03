@@ -7,7 +7,7 @@ import passport from "passport";
 import { DataSource } from "typeorm";
 import { AuthDBEntity } from "./infra/database/entities/auth.entity";
 import { router } from "./infra/http/routes";
-import { PassportConfig } from "./config/passportConfig";
+import { PassportConfig } from "./infra/config/passportConfig";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -31,16 +31,8 @@ AppDataSource.initialize()
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(passport.initialize());
+    // app.use(passport.session());
     app.use("/api", router);
-
-    app.post(
-      "/login",
-      passport.authenticate("local", {
-        successRedirect: "/",
-        failureRedirect: "/login",
-        failureFlash: false,
-      })
-    );
 
     const port = process.env.PORT || 3000;
     app.listen(port, () => {

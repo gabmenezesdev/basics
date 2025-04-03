@@ -2,6 +2,7 @@ import { Repository } from "typeorm";
 import { AuthDBEntity } from "../../../infra/database/entities/auth.entity";
 import { HashService } from "../../../service/hashService";
 import { AuthRepository } from "../../../infra/repository/authRepository";
+import { PassportConfig } from "../../../infra/config/passportConfig";
 
 export class AuthUserByEmailUseCase {
   constructor(
@@ -27,7 +28,9 @@ export class AuthUserByEmailUseCase {
       }
 
       const { password, ...user } = foundAuth;
-      return callback(null, user);
+
+      const token = PassportConfig.generateToken(user);
+      return callback(null, token);
     } catch (error) {
       return callback(error);
     }

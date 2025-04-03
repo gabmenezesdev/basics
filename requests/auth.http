@@ -5,3 +5,13 @@ Content-Type: application/json
   "email": "teste@teste.com",
   "password": "teste"
 }
+
+###
+
+POST http://localhost:3413/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com",
+  "password": "teste"
+}
