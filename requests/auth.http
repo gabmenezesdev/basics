@@ -1,8 +1,17 @@
-POST http://localhost:3413/api/auth
+POST http://localhost:3413/api/auth/register
 Content-Type: application/json
 
 {
   "email": "teste@teste.com",
+  "password": "teste"
+}
+
+###
+POST http://localhost:3413/api/auth/register
+Content-Type: application/json
+
+{
+  "phoneNumber": "5521995374929",
   "password": "teste"
 }
 

@@ -31,7 +31,9 @@ AppDataSource.initialize()
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(passport.initialize());
-    // app.use(passport.session());
+    app.get("/ping", (req, res) => {
+      res.status(200).json({ message: "pong" });
+    });
     app.use("/api", router);
 
     const port = process.env.PORT || 3000;

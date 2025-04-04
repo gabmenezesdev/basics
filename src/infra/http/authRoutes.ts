@@ -5,7 +5,7 @@ import passport from "passport";
 const AuthRouter = Router();
 const createAuthController = new CreateAuthController();
 
-AuthRouter.post("/", createAuthController.handle);
+AuthRouter.post("/register", createAuthController.handle);
 AuthRouter.post("/login", async (req, res, next) => {
   passport.authenticate(
     "local",
