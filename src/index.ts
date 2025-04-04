@@ -32,7 +32,7 @@ AppDataSource.initialize()
     app.use(express.urlencoded({ extended: false }));
     app.use(passport.initialize());
     app.get("/ping", (req, res) => {
-      res.status(200).json({ message: "pong" });
+      res.status(200).json({ message: "ping" });
     });
     app.use("/api", router);
 
