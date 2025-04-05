@@ -1,3 +1,4 @@
+import { StatusCodes } from "http-status-codes";
 import { CreateAuthByEmailAndPasswordUsecase } from "../../../domain/usecase/auth/createAuthByEmailAndPasswordUsecase";
 import { HashService } from "../../../service/hashService";
 import { AuthRepository } from "../../repository/authRepository";
@@ -13,7 +14,9 @@ export class CreateEmailAuthController {
       const createAuthByEmailAndPasswordUsecase =
         new CreateAuthByEmailAndPasswordUsecase(authRepository, hashService);
       await createAuthByEmailAndPasswordUsecase.execute({ email, password });
-      res.status(201).send();
+      res
+        .status(StatusCodes.CREATED)
+        .send({ message: "User created successfully" });
     } catch (error) {
       next(error);
     }

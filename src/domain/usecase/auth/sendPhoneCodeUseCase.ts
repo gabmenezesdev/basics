@@ -26,7 +26,7 @@ export class SendPhoneCodeUseCase {
         phoneCodeExpirationLastSentPlus5Minutes.getMinutes() + 5
       );
 
-      if (phoneCodeExpirationLastSentPlus5Minutes < new Date()) {
+      if (phoneCodeExpirationLastSentPlus5Minutes > new Date()) {
         return operationDontAllowedError(
           "Código já enviado, aguarde 5 minutos para solicitar um novo."
         );
@@ -35,7 +35,7 @@ export class SendPhoneCodeUseCase {
 
     const code = generateRandomCode().toString();
     const expirationTime = new Date();
-    expirationTime.setMinutes(expirationTime.getMinutes() + 5);
+    expirationTime.setMinutes(expirationTime.getMinutes() + 30);
 
     await this.authRepository.updateCode(
       phone,
@@ -46,7 +46,8 @@ export class SendPhoneCodeUseCase {
 
     await this.whatsappService.sendWhatsappTextMessage(
       phone,
-      `${process.env.BRAND_NAME} - Seu código de verificação é: ${code}. O código expira em 5 minutos.`
+      `${process.env.BRAND_NAME} - Segue abaixou seu código de verificação! Ele expira em 30 minutos.👇`
     );
+    await this.whatsappService.sendWhatsappTextMessage(phone, code);
   }
 }

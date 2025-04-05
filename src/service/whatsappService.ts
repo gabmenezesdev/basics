@@ -8,7 +8,7 @@ export class WhatsAppService {
     message: string
   ): Promise<void> {
     await axios.post(
-      `${process.env.EVOLUTION_API_URL}/message/sendText`,
+      `${process.env.EVOLUTION_API_URL}/message/sendText/${process.env.EVOLUTION_API_CHANNEL}`,
       {
         number: phoneNumber,
         text: message,

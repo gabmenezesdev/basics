@@ -11,8 +11,7 @@ POST http://localhost:3413/api/auth/register/phone
 Content-Type: application/json
 
 {
-  "phoneNumber": "5521995374929",
-  "password": "teste"
+  "phoneNumber": "5521997712596"
 }
 
 ###
@@ -31,4 +30,12 @@ Content-Type: application/json
 {
   "email": "teste@teste.com",
   "password": "teste"
+}
+
+###
+POST http://localhost:3413/api/auth/send-code/phone
+Content-Type: application/json
+
+{
+  "phoneNumber": "5521995374929"
 }
