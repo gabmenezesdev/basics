@@ -6,7 +6,7 @@ import express from "express";
 import passport from "passport";
 import { DataSource } from "typeorm";
 import { AuthDBEntity } from "./infra/database/entities/auth.entity";
-import { router } from "./infra/http/routes";
+import { router } from "./infra/http/routes/routes";
 import { PassportConfig } from "./infra/config/passportConfig";
 import { errorMiddleware } from "./infra/http/errorHandler";
 
