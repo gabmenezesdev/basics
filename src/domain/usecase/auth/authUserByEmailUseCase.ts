@@ -1,6 +1,6 @@
 import { HashService } from "../../../service/hashService";
 import { AuthRepository } from "../../../infra/repository/authRepository";
-import { PassportConfig } from "../../../infra/config/passportConfig";
+import { JwtService } from "../../../service/jwtService";
 
 export class AuthUserByEmailUseCase {
   constructor(
@@ -27,7 +27,7 @@ export class AuthUserByEmailUseCase {
 
       const { password, ...user } = foundAuth;
 
-      const token = PassportConfig.generateToken(user);
+      const token = JwtService.generateToken(user);
       return callback(null, token);
     } catch (error) {
       return callback(error);

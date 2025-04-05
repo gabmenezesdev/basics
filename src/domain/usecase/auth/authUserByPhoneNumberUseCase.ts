@@ -1,8 +1,5 @@
-import { Repository } from "typeorm";
-import { AuthDBEntity } from "../../../infra/database/entities/auth.entity";
-import { HashService } from "../../../service/hashService";
 import { AuthRepository } from "../../../infra/repository/authRepository";
-import { PassportConfig } from "../../../infra/config/passportConfig";
+import { JwtService } from "../../../service/jwtService";
 
 export class LoginWithPhoneOnlyUsecase {
   constructor(private authRepository: AuthRepository) {}
@@ -17,7 +14,7 @@ export class LoginWithPhoneOnlyUsecase {
     try {
       const { password, ...user } = foundAuth;
 
-      const token = PassportConfig.generateToken(user);
+      const token = JwtService.generateToken(user);
       return callback(null, token);
     } catch (error) {
       return callback(error);

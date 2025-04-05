@@ -13,7 +13,7 @@ export class CreateAuthByEmailAndPasswordUsecase {
   ): Promise<void> {
     const auth = await this.authRepository.findByEmail(data.email);
     if (auth) {
-      alreadyExistsError("email");
+      throw alreadyExistsError("email");
     }
 
     const password = await this.hashService.hashPassword(data.password);

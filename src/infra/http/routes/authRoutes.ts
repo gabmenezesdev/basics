@@ -4,15 +4,18 @@ import passport from "passport";
 import { Request, Response } from "express";
 import { CreatePhoneAuthController } from "../../controller/auth/createPhoneAuthController";
 import { SendPhoneCodeController } from "../../controller/auth/sendPhoneCodeController";
+import { ConfirmPhoneCodeController } from "../../controller/auth/confirmPhoneCodeController";
 
 const AuthRouter = Router();
 const createEmailAuthController = new CreateEmailAuthController();
 const createAuthController = new CreatePhoneAuthController();
 const sendPhoneCodeController = new SendPhoneCodeController();
+const confirmPhoneCodeController = new ConfirmPhoneCodeController();
 
+AuthRouter.post("/send-code/phone", sendPhoneCodeController.handle);
+AuthRouter.post("/confirm-code/phone", confirmPhoneCodeController.handle);
 AuthRouter.post("/register/email", createEmailAuthController.handle);
 AuthRouter.post("/register/phone", createAuthController.handle);
-AuthRouter.post("/send-code/phone", sendPhoneCodeController.handle);
 AuthRouter.post(
   "/login/email",
   passport.authenticate("login-email", { session: false }),

@@ -15,7 +15,7 @@ export class SendPhoneCodeUseCase {
   async execute(phone: string): Promise<void> {
     const auth = await this.authRepository.findByPhoneNumber(phone);
     if (!auth) {
-      return dontExistError("Usuário");
+      throw dontExistError("Usuário");
     }
 
     if (auth.phoneCodeExpirationLastSent) {
@@ -27,7 +27,7 @@ export class SendPhoneCodeUseCase {
       );
 
       if (phoneCodeExpirationLastSentPlus5Minutes > new Date()) {
-        return operationDontAllowedError(
+        throw operationDontAllowedError(
           "Código já enviado, aguarde 5 minutos para solicitar um novo."
         );
       }

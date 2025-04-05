@@ -33,6 +33,16 @@ export class AuthRepository {
     );
   }
 
+  async confirmPhone(phoneNumber: string): Promise<void> {
+    await this.repository.update(
+      { phoneNumber },
+      {
+        phoneCode: null,
+        phoneConfirmed: true,
+      }
+    );
+  }
+
   async create(data: {
     emai?: string;
     phoneNumber?: string;

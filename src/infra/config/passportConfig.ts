@@ -1,5 +1,4 @@
 import { Strategy as LocalStrategy } from "passport-local";
-import jwt from "jsonwebtoken";
 import { AuthUserByEmailUseCase } from "../../domain/usecase/auth/authUserByEmailUseCase";
 import { AuthRepository } from "../repository/authRepository";
 import { HashService } from "../../service/hashService";
@@ -44,11 +43,5 @@ export class PassportConfig {
         }
       )
     );
-  }
-
-  static generateToken(data: any) {
-    return jwt.sign(data, process.env.JWT_SECRET || "your_jwt_secret", {
-      expiresIn: "1h",
-    });
   }
 }

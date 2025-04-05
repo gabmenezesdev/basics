@@ -10,7 +10,7 @@ export class CreateAuthByPhoneOnlyUsecase {
   ): Promise<void> {
     const auth = await this.authRepository.findByPhoneNumber(data.phoneNumber);
     if (auth) {
-      alreadyExistsError("telefone");
+      throw alreadyExistsError("telefone");
     }
 
     const registerData = {

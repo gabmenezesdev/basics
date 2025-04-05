@@ -39,3 +39,12 @@ Content-Type: application/json
 {
   "phoneNumber": "5521995374929"
 }
+
+###
+POST http://localhost:3413/api/auth/confirm-code/phone
+Content-Type: application/json
+
+{
+  "phoneNumber": "5521995374929",
+  "code": "39435"
+}

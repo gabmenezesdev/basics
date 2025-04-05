@@ -23,3 +23,15 @@ export function operationDontAllowedError(reason: string) {
     status: StatusCodes.BAD_REQUEST,
   });
 }
+
+export function invalidCodeException() {
+  throw Object.assign(new Error(`Código inválido`), {
+    status: StatusCodes.BAD_REQUEST,
+  });
+}
+
+export function expiredCodeException() {
+  throw Object.assign(new Error(`Código inválido`), {
+    status: StatusCodes.BAD_REQUEST,
+  });
+}
