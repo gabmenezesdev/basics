@@ -17,6 +17,22 @@ export class AuthRepository {
     return this.repository.findOne({ where: { phoneNumber } });
   }
 
+  async updateCode(
+    phoneNumber: string,
+    code: string | null,
+    expiration: Date | null,
+    expirationLastSent: Date | null
+  ): Promise<void> {
+    await this.repository.update(
+      { phoneNumber },
+      {
+        phoneCode: code,
+        phoneCodeExpiration: expiration,
+        phoneCodeExpirationLastSent: expirationLastSent,
+      }
+    );
+  }
+
   async create(data: {
     emai?: string;
     phoneNumber?: string;

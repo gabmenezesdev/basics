@@ -1,15 +1,18 @@
 import { Router } from "express";
-import { CreateEmailAuthController } from "../controller/auth/createEmailAuthController";
+import { CreateEmailAuthController } from "../../controller/auth/createEmailAuthController";
 import passport from "passport";
 import { Request, Response } from "express";
-import { CreatePhoneAuthController } from "../controller/auth/createPhoneAuthController";
+import { CreatePhoneAuthController } from "../../controller/auth/createPhoneAuthController";
+import { SendPhoneCodeController } from "../../controller/auth/sendPhoneCodeController";
 
 const AuthRouter = Router();
 const createEmailAuthController = new CreateEmailAuthController();
 const createAuthController = new CreatePhoneAuthController();
+const sendPhoneCodeController = new SendPhoneCodeController();
 
 AuthRouter.post("/register/email", createEmailAuthController.handle);
 AuthRouter.post("/register/phone", createAuthController.handle);
+AuthRouter.post("/send-code/phone", sendPhoneCodeController.handle);
 AuthRouter.post(
   "/login/email",
   passport.authenticate("login-email", { session: false }),

@@ -1,7 +1,25 @@
 import { StatusCodes } from "http-status-codes";
 
 export function alreadyExistsError(parametro: string) {
-  throw Object.assign(new Error(`${parametro} Já existe`), {
+  throw Object.assign(new Error(`${parametro} já existe`), {
+    status: StatusCodes.BAD_REQUEST,
+  });
+}
+
+export function invalidParamError(parametro: string) {
+  throw Object.assign(new Error(`${parametro} inválido`), {
+    status: StatusCodes.BAD_REQUEST,
+  });
+}
+
+export function dontExistError(parametro: string) {
+  throw Object.assign(new Error(`${parametro} não existe`), {
+    status: StatusCodes.BAD_REQUEST,
+  });
+}
+
+export function operationDontAllowedError(reason: string) {
+  throw Object.assign(new Error(`Não permitido, motivo: ${reason}`), {
     status: StatusCodes.BAD_REQUEST,
   });
 }
