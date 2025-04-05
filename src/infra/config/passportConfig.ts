@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { AuthUserByEmailUseCase } from "../../domain/usecase/auth/authUserByEmailUseCase";
 import { AuthRepository } from "../repository/authRepository";
 import { HashService } from "../../service/hashService";
-import { CreateAuthByPhoneOnlyUsecase } from "../../domain/usecase/auth/authUserByPhoneNumberUseCase";
+import { LoginWithPhoneOnlyUsecase } from "../../domain/usecase/auth/authUserByPhoneNumberUseCase";
 
 export class PassportConfig {
   static configurePassport(passport: any) {
@@ -34,11 +34,10 @@ export class PassportConfig {
         { usernameField: "phoneNumber" },
         async (phoneNumber, password, done) => {
           try {
-            const authUserByPhoneUseCase = new CreateAuthByPhoneOnlyUsecase(
-              authRepository,
-              hashService
+            const authUserByPhoneUseCase = new LoginWithPhoneOnlyUsecase(
+              authRepository
             );
-            await authUserByPhoneUseCase.execute(phoneNumber, password, done);
+            await authUserByPhoneUseCase.execute(phoneNumber, done);
           } catch (error) {
             done(error);
           }

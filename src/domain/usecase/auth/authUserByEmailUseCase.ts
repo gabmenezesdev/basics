@@ -11,7 +11,7 @@ export class AuthUserByEmailUseCase {
   async execute(email: string, inputPassword: string, callback: Function) {
     const foundAuth = await this.authRepository.findByEmail(email);
 
-    if (!foundAuth) {
+    if (!foundAuth || !foundAuth.password) {
       return callback(null, false, { message: "Usuário Não encontrado" });
     }
 
