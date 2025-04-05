@@ -1,5 +1,6 @@
 import { HashService } from "../../../service/hashService";
 import { AuthRepository } from "../../../infra/repository/authRepository";
+import { alreadyExistsError } from "../../../infra/http/exceptions";
 
 export class CreateAuthByEmailAndPasswordUsecase {
   constructor(
@@ -12,7 +13,7 @@ export class CreateAuthByEmailAndPasswordUsecase {
   ): Promise<void> {
     const auth = await this.authRepository.findByEmail(data.email);
     if (auth) {
-      throw new Error("Email já utilizado");
+      alreadyExistsError("email");
     }
 
     const password = await this.hashService.hashPassword(data.password);

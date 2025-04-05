@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { StatusCodes } from "http-status-codes";
 
 export class HashService {
   private readonly saltRounds: number;
@@ -9,7 +10,9 @@ export class HashService {
 
   public async hashPassword(plainPassword: string): Promise<string> {
     if (!plainPassword) {
-      throw new Error("Password cannot be empty");
+      throw Object.assign(new Error("Senha não pode estar vazia"), {
+        status: StatusCodes.BAD_REQUEST,
+      });
     }
 
     const salt = await bcrypt.genSalt(this.saltRounds);

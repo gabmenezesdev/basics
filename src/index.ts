@@ -8,6 +8,7 @@ import { DataSource } from "typeorm";
 import { AuthDBEntity } from "./infra/database/entities/auth.entity";
 import { router } from "./infra/http/routes";
 import { PassportConfig } from "./infra/config/passportConfig";
+import { errorMiddleware } from "./infra/http/errorHandler";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -35,6 +36,8 @@ AppDataSource.initialize()
       res.status(200).json({ message: "ping" });
     });
     app.use("/api", router);
+
+    app.use(errorMiddleware);
 
     const port = process.env.PORT || 3000;
     app.listen(port, () => {

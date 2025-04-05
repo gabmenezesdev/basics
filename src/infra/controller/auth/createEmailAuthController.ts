@@ -3,7 +3,7 @@ import { HashService } from "../../../service/hashService";
 import { AuthRepository } from "../../repository/authRepository";
 import { Request, Response, NextFunction } from "express";
 
-export class CreateAuthController {
+export class CreateEmailAuthController {
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { email, password } = req.body;
 

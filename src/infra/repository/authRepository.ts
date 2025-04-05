@@ -13,7 +13,15 @@ export class AuthRepository {
     return this.repository.findOne({ where: { email } });
   }
 
-  async create(data: { email: string; password: string }): Promise<void> {
+  async findByPhoneNumber(phoneNumber: string): Promise<AuthDBEntity | null> {
+    return this.repository.findOne({ where: { phoneNumber } });
+  }
+
+  async create(data: {
+    emai?: string;
+    phoneNumber?: string;
+    password?: string;
+  }): Promise<void> {
     await this.repository.save(data);
   }
 }

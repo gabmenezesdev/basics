@@ -17,7 +17,7 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3413/api/auth/login
+POST http://localhost:3413/api/auth/login/email
 Content-Type: application/json
 
 {
