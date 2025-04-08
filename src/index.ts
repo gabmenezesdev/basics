@@ -9,6 +9,7 @@ import { AuthDBEntity } from "./infra/database/entities/auth.entity";
 import { router } from "./infra/http/routes/routes";
 import { PassportConfig } from "./infra/config/passportConfig";
 import { errorMiddleware } from "./infra/http/errorHandler";
+import cors from "cors";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -29,6 +30,8 @@ AppDataSource.initialize()
     PassportConfig.configurePassport(passport);
 
     const app = express();
+    app.use(cors());
+
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(passport.initialize());
