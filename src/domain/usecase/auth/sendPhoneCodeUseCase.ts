@@ -43,11 +43,20 @@ export class SendPhoneCodeUseCase {
       expirationTime,
       new Date()
     );
-    +(await this.whatsappService.sendWhatsappTextMessage(
-      phone,
-      `${process.env.BRAND_NAME} - Segue abaixou seu código de verificação! Ele expira em 30 minutos.👇`,
-      0
-    ));
+
+    console.log("---enciando");
+    console.log(phone);
+
+    await this.whatsappService
+      .sendWhatsappTextMessage(
+        phone,
+        `${process.env.BRAND_NAME} - Segue abaixou seu código de verificação! Ele expira em 30 minutos.👇`,
+        0
+      )
+      .catch((error) => {
+        console.log("Erro ao enviar mensagem");
+        console.log(error);
+      });
     await this.whatsappService.sendWhatsappTextMessage(phone, code, 500);
   }
 }

@@ -7,6 +7,13 @@ export class CreatePhoneAuthController {
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { phoneNumber } = req.body;
 
+    if (!phoneNumber) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Número de telefone é obrigatório!" });
+      return;
+    }
+
     try {
       const authRepository = new AuthRepository();
       const createAuthByEmailAndPasswordUsecase =
@@ -14,7 +21,7 @@ export class CreatePhoneAuthController {
       await createAuthByEmailAndPasswordUsecase.execute({ phoneNumber });
       res
         .status(StatusCodes.CREATED)
-        .json({ message: "User created successfully" });
+        .json({ message: "Usuário criado com sucesso!" });
     } catch (error) {
       next(error);
     }

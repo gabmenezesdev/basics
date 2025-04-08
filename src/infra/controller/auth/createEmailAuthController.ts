@@ -8,6 +8,13 @@ export class CreateEmailAuthController {
   async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { email, password } = req.body;
 
+    if (!email || !password) {
+      res
+        .status(StatusCodes.BAD_REQUEST)
+        .json({ message: "Email e senha são obrigatórios!" });
+      return;
+    }
+
     try {
       const hashService = new HashService();
       const authRepository = new AuthRepository();
@@ -16,7 +23,7 @@ export class CreateEmailAuthController {
       await createAuthByEmailAndPasswordUsecase.execute({ email, password });
       res
         .status(StatusCodes.CREATED)
-        .send({ message: "User created successfully" });
+        .send({ message: "Usuário criado com sucesso!" });
     } catch (error) {
       next(error);
     }
