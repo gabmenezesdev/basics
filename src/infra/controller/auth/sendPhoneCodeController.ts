@@ -19,6 +19,7 @@ export class SendPhoneCodeController {
       await sendPhoneCodeUsecase.execute(phoneNumber);
       res.status(StatusCodes.OK).json({ message: "Code sent successfully" });
     } catch (error) {
+      console.log(error);
       next(error);
     }
   }
