@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 
 export function alreadyExistsError(parametro: string) {
   throw Object.assign(new Error(`${parametro} já existe`), {
-    status: StatusCodes.BAD_REQUEST,
+    status: StatusCodes.CONFLICT,
   });
 }
 
